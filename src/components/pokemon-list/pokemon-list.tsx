@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Pokemon from '../../models/Pokemon';
 import { PokeAPIService } from '../../services/poke-api-service';
+import PokemonListed from '../pokemon-listed/pokemon-listed';
 
 const PokemonList = () => {
     const [pokemonList, setCurrentPokemonList] = useState<Pokemon[]>([]);
@@ -18,7 +19,7 @@ const PokemonList = () => {
         getPokemons();
     }, []);
 
-    if(pokemonList.length == 0) {
+    if(pokemonList.length === 0) {
         return (
           <div>
             <p>Pokemon List is empty</p>
@@ -27,17 +28,15 @@ const PokemonList = () => {
     }
 
     return(
-      <div>
-        {
-          pokemonList.length > 0 && pokemonList.map(({id, name, pokedexListImage}) => (
-            <div key={id}>
-              <p><b>{id}</b></p>
-              <p>name: {name}</p>
-              <img src={pokedexListImage} alt="" />
-            </div>
-            ))
-        } 
-      </div>
+      <div className='list-group'>
+          {
+            pokemonList.length > 0 && pokemonList.map(({id, name, pokedexListImage}) => (
+              <div key={id} className='list-group-item'>
+                <PokemonListed pokemonId={id} pokemonName={name} pokemonImage={pokedexListImage}/>
+              </div>
+              ))
+          } 
+        </div>
     );
 
     
