@@ -1,0 +1,15 @@
+
+.pokemonListed {
+    .id {
+        font-weight: bold;
+    }
+
+    .name {
+        font-style: italic;
+        text-transform: capitalize;
+    }
+
+    .image {
+        text-align: center;
+    }
+}

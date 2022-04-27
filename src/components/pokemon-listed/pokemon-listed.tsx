@@ -1,4 +1,4 @@
-import './pokemon-listed.scss';
+import  pokemonListedModule from './pokemon-listed.module.scss';
 
 interface IPokemonListedProps {
     pokemonId: number;
@@ -8,13 +8,14 @@ interface IPokemonListedProps {
 
 
 const PokemonListed = ({pokemonId, pokemonName, pokemonImage}: IPokemonListedProps) => {
+    console.log(pokemonListedModule);
     return(
-        <div className='row pokemon-listed'>
-            <div className='col-xs-1 col-md-2 col-lg-2 id'>{ pokemonId }.</div>
+        <div className={`row pokemon-listed ${pokemonListedModule.pokemonListed}`}>
+            <div className={`col-xs-1 col-md-2 col-lg-2 ${pokemonListedModule.id}`}>{ pokemonId }.</div>
 
-            <div className='col-xs-5 col-md-4 col-lg-4 name'>{ pokemonName }</div>
+            <div className={`col-xs-5 col-md-5 col-lg-4 ${pokemonListedModule.name}`}>{ pokemonName }</div>
 
-            <div className="col-xs-6 col-md-4 col-lg-4">
+            <div className={`col-xs-6 col-md-5 col-lg-6 ${pokemonListedModule.image}`}>
                 <img src={pokemonImage} alt="" />
             </div>
         </div>
