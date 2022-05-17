@@ -1,23 +1,18 @@
-import { useState, useEffect } from 'react';
-import Pokemon from '../../models/Pokemon';
-import { PokeAPIService } from '../../services/poke-api-service';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPokemonList } from '../../redux/states/pokemon-list.state';
 import PokemonListed from '../pokemon-listed/pokemon-listed';
+import { AppDispatch, RootState } from '../../redux/store';
 
 const PokemonList = () => {
-    const [pokemonList, setCurrentPokemonList] = useState<Pokemon[]>([]);
+    const pokemonList = useSelector((state: RootState) => {
+      return Object.values(state.pokemonList);
+    });
+    const dispatch: AppDispatch = useDispatch();
 
-    useEffect(() =>{
-        const getPokemons = async() => {
-            const rawPokemonList = await PokeAPIService.getPokemonList();
-
-            const pokeList = await Promise.all(
-              rawPokemonList.map(async ({name}) => await PokeAPIService.getPokemon(name))
-            );
-            setCurrentPokemonList(pokeList);
-        }
-
-        getPokemons();
-    }, []);
+    useEffect(() => {
+      dispatch(getPokemonList());
+    }, [dispatch]);
 
     if(pokemonList.length === 0) {
         return (
@@ -28,15 +23,17 @@ const PokemonList = () => {
     }
 
     return(
-      <div className='list-group'>
+      <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        <div className='list-group'>
           {
             pokemonList.length > 0 && pokemonList.map(({id, name, pokedexListImage}) => (
               <div key={id} className='list-group-item'>
                 <PokemonListed pokemonId={id} pokemonName={name} pokemonImage={pokedexListImage}/>
               </div>
-              ))
+            ))
           } 
         </div>
+      </div>
     );
 
     

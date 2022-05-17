@@ -1,17 +1,19 @@
+import { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import AppContainer from './components/app-container/app-container';
 import PokemonList from './components/pokemon-list/pokemon-list';
 
-function App() {
+const App = () => {
   return (
-    <div className="container">
-      <div className="row ustify-content-start">
-        <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-          <PokemonList />
-        </div>
+    <Provider store={store}>
+      <AppContainer>
+        <PokemonList />
         <div className="col-xs-6 col-sm-6 col-md-8 col-lg-8">
           description
         </div>
-      </div>
-    </div>
+      </AppContainer>
+    </Provider>    
   );
 }
 
