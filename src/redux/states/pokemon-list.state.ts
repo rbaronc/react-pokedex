@@ -28,7 +28,13 @@ export const pokemonListSlice = createSlice({
             });
         })
     },
-    reducers: {}
+    reducers: {
+        setPokemonData: (state, action) => {
+            state[action.payload.name] = { ...state[action.payload.name], ...action.payload }
+            return state;
+        },
+    }
 });
 
+export const { setPokemonData } = pokemonListSlice.actions;
 export default pokemonListSlice.reducer;

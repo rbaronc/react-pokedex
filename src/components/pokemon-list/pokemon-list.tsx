@@ -26,9 +26,9 @@ const PokemonList = () => {
       <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         <div className='list-group'>
           {
-            pokemonList.length > 0 && pokemonList.map(({id, name, pokedexListImage}) => (
+            pokemonList.length > 0 && pokemonList.map(({id, name, pokedexListImage, species}) => (
               <div key={id} className='list-group-item'>
-                <PokemonListed pokemonId={id} pokemonName={name} pokemonImage={pokedexListImage}/>
+                <PokemonListed pokemonId={id} pokemonName={name} pokemonImage={pokedexListImage} pokemonSpecies={species}/>
               </div>
             ))
           } 
